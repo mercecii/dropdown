@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
+import ErrorBoundary from './ErrorBoundary';
 
 
 
@@ -44,6 +45,7 @@ const DropdownPage = () => {
 
   return (
     <>
+    <ErrorBoundary>
       <Dropdown 
       options={pokeList.map(el=>({label:el.name,value:el.url}))} 
       onChangeHandler={async (ev) => {
@@ -53,6 +55,8 @@ const DropdownPage = () => {
       } } 
       />
       <div>Details: {abilityNames.map(el => <li>{el}</li>)}</div>
+      </ErrorBoundary>
+      <div> hello</div>
     </>
   )
 }

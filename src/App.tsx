@@ -5,9 +5,9 @@ import DropdownPage from './components/DropdownPage';
 
 function App() {
   return (
-    <div className="App">
-     <DropdownPage />
-    </div>
+      <div className="App">
+      <DropdownPage />
+      </div>
   );
 }
 

@@ -1,8 +1,8 @@
-import React, { createContext, useReducer } from "react";
-import logo from "./logo.svg";
+import { createContext, useReducer } from "react";
 import "./App.css";
 import DropdownPage from "./components/DropdownPage";
 import Counter from "./components/Counter";
+import InputDebounced from "./components/InputDebounced";
 
 const initialState = 0;
 const reducer = (state: number, action: { type: string }) => {
@@ -28,6 +28,7 @@ function App() {
       <div className="App">
         <DropdownPage />
         <Counter />
+        <InputDebounced />
       </div>
     </counterContext.Provider>
   );

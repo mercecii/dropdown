@@ -1,10 +1,13 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import NoMatch from "./NoMatch";
 import OrderSummary from "./OrderSummary";
 import Admin from "./User/Admin";
 import Welcome from "./Welcome";
+import Login from "./Login";
+import Profile from "./User/Profile";
+import RequireAuth from "../utils/RequireAuth";
 
 const LazyHome = React.lazy(() => import("./Home"));
 const ComponentA = React.lazy(() => import("./ComponentA"));
@@ -16,7 +19,7 @@ const Products = React.lazy(() => import("./Product/Products"));
 const NewProducts = React.lazy(() => import("./Product/NewProducts"));
 const FeaturedProducts = React.lazy(() => import("./Product/FeaturedProducts"));
 
-const WithSuspense = ({ children }: { children: React.ReactElement }) => {
+const WithSuspense: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <React.Suspense fallback={<>Loading . . .</>}>{children}</React.Suspense>
   );
@@ -38,7 +41,11 @@ const Router = () => {
         />
         <Route
           path="products"
-          element={<WithSuspense children={<Products />} />}
+          element={
+            <RequireAuth>
+              <WithSuspense children={<Products />} />
+            </RequireAuth>
+          }
         >
           <Route
             index
@@ -60,6 +67,17 @@ const Router = () => {
           />
           <Route path="admin" element={<WithSuspense children={<Admin />} />} />
         </Route>
+        <Route path="login" element={<WithSuspense children={<Login />} />} />
+
+        <Route
+          path="profile"
+          element={
+            <RequireAuth>
+              <WithSuspense children={<Profile />} />
+            </RequireAuth>
+          }
+        />
+
         <Route path="*" element={<WithSuspense children={<NoMatch />} />} />
       </Routes>
     </div>

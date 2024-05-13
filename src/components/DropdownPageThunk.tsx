@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPokeList, selectPokeList } from "../redux/slices/counterSlice";
+import { UnknownAction } from "@reduxjs/toolkit";
 
-const listUrl = "https://pokeapi.co/api/v2/pokemon?limit=151";
+// const listUrl = "https://pokeapi.co/api/v2/pokemon?limit=151";
 
-const DropdownPage = () => {
-  console.log("rendering DropdownPage . . .");
-  const [pokeList, setPokeList] = useState<{ name: string; url: string }[]>([]);
+const DropdownPageThunk = () => {
+  console.log("rendering DropdownPageThunk . . .");
+  const pokeList = useSelector(selectPokeList);
   const [abilityNames, setAbilityNames] = useState<string[]>([]);
   const [cache, setCache] = useState<Record<string, string[]>>({});
+  const dispatch = useDispatch();
 
   const getResponse = async <T = undefined,>(url: string): Promise<T> => {
     const res = await fetch(url);
@@ -27,8 +31,7 @@ const DropdownPage = () => {
   };
 
   const getPokeList = async () => {
-    const { results } = (await getResponse(listUrl)) as { results: [] };
-    setPokeList(results);
+    dispatch(fetchPokeList() as unknown as UnknownAction);
   };
 
   const generateAbilityNames = (
@@ -62,4 +65,4 @@ const DropdownPage = () => {
   );
 };
 
-export default DropdownPage;
+export default DropdownPageThunk;

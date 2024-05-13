@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useAuth } from "./auth";
 import { Navigate, useLocation } from "react-router-dom";
 

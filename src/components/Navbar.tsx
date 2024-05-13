@@ -12,6 +12,9 @@ const Navbar = () => {
   return (
     <nav>
       <NavLink style={getNavLinkStyle} to={"/"}>
+        Welcome
+      </NavLink>
+      <NavLink style={getNavLinkStyle} to={"home"}>
         Home
       </NavLink>
       <NavLink style={getNavLinkStyle} to={"a"}>

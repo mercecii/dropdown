@@ -15,7 +15,9 @@ const ComponentB = React.lazy(() => import("./ComponentB"));
 const ComponentC = React.lazy(() => import("./ComponentC"));
 const UserDetails = React.lazy(() => import("./User/UserDetails"));
 const User = React.lazy(() => import("./User/User"));
-const Products = React.lazy(() => import("./Product/Products"));
+const Products = React.lazy(
+  () => import(/* webpackChunkName: "Products" */ "./Product/Products")
+);
 const NewProducts = React.lazy(() => import("./Product/NewProducts"));
 const FeaturedProducts = React.lazy(() => import("./Product/FeaturedProducts"));
 

@@ -26,6 +26,9 @@ const Navbar = () => {
       <NavLink style={getNavLinkStyle} to={"products"}>
         Products
       </NavLink>
+      <NavLink style={getNavLinkStyle} to={"user"}>
+        Users
+      </NavLink>
     </nav>
   );
 };

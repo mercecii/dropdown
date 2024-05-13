@@ -13,6 +13,9 @@ import NoMatch from "./components/NoMatch";
 import Products from "./components/Product/Products";
 import FeaturedProducts from "./components/Product/FeaturedProducts";
 import NewProducts from "./components/Product/NewProducts";
+import User from "./components/User/User";
+import UserDetails from "./components/User/UserDetails";
+import Admin from "./components/User/Admin";
 
 const initialState = 0;
 const reducer = (state: number, action: { type: string }) => {
@@ -38,21 +41,20 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          <Route Component={Home} path="/" />
-          <Route Component={ComponentA} path="a" />
-          <Route Component={ComponentB} path="b" />
-          <Route Component={ComponentC} path="c" />
-          <Route Component={OrderSummary} path="order-summary" />
-          <Route Component={Products} path="products">
-            <Route
-              index
-              Component={FeaturedProducts}
-              path="featured-products"
-            />
+          <Route path="/" Component={Home} />
+          <Route path="a" Component={ComponentA} />
+          <Route path="b" Component={ComponentB} />
+          <Route path="c" Component={ComponentC} />
+          <Route path="order-summary" Component={OrderSummary} />
+          <Route path="products" Component={Products}>
             <Route index Component={FeaturedProducts} />
-            <Route Component={NewProducts} path="new-products" />
+            <Route path="new-products" Component={NewProducts} />
+            <Route path="featured-products" Component={FeaturedProducts} />
           </Route>
-
+          <Route path="user" Component={User}>
+            <Route path=":userId" Component={UserDetails} />
+            <Route path="admin" Component={Admin} />
+          </Route>
           <Route Component={NoMatch} path="*" />
         </Routes>
       </div>

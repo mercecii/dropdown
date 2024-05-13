@@ -1,8 +1,7 @@
 import { createContext, useReducer } from "react";
 import "./App.css";
-import DropdownPage from "./components/DropdownPage";
-import Counter from "./components/Counter";
-import InputDebounced from "./components/InputDebounced";
+import Router from "./components/Router";
+import { AuthProvider } from "./utils/auth";
 
 const initialState = 0;
 const reducer = (state: number, action: { type: string }) => {
@@ -24,13 +23,13 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <counterContext.Provider value={[state, dispatch]}>
-      <div className="App">
-        <DropdownPage />
-        <Counter />
-        <InputDebounced />
-      </div>
-    </counterContext.Provider>
+    <AuthProvider>
+      <counterContext.Provider value={[state, dispatch]}>
+        <div className="App">
+          <Router />
+        </div>
+      </counterContext.Provider>
+    </AuthProvider>
   );
 }
 
